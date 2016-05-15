@@ -1,21 +1,15 @@
 package arraus;
 public class StrokeArray {
-    public static void main(String[] args) {
-
-        String[] dc = new String[10];
-
-        dc[0] = "Batman";
-        dc[1] = "Superman";
-        dc[2] = "Wonderwoman";
-        dc[3] = "Flash";
-        dc[4] = "Aquaman";
-        dc[5] = "Cyborg";
-        dc[6] = "Greenlight";
-        dc[7] = "Batman";
-        dc[8] = "Batman";
-        dc[9] = "Batman";
-
-        boolean mask[] = new boolean[dc.length];
+	
+	private String[] dc;
+	
+	public StrokeArray(String[] dc){
+		this.dc = dc;
+	}
+	
+	public void comics(){
+		
+	boolean mask[] = new boolean[dc.length];
         int remove = 0;
 
         for (int i = 0; i < dc.length; i++) {
@@ -40,5 +34,10 @@ public class StrokeArray {
                 System.out.println(dc[i]);
             }
         }
+		
+	}
+    public static void main(String[] args) {
+
+        new StrokeArray(new String[]{"Batman", "Superman", "Wonderwoman", "Flash", "Aquaman", "Cyborg", "Greenlight", "Batman", "Batman", "Batman"}).comics();       
 }
 }
