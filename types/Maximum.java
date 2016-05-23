@@ -1,38 +1,23 @@
 
+package types;
+/** Класс определяет максимальную длину треугольника
+* @author B.W.
+*@since 23.05.16
+*/ 
 public class Maximum {
 
     public Point a;
     public Point b;
     public Point c;
 
-
-    double maximumm;
-
-
-    public double max(){
-
-        double r = a.distanceTo(b);
-        double s = b.distanceTo(c);
-        double h = a.distanceTo(c);
+/**Определение максимальной длины сторон
+*@param first первый аргумент
+*@param second второй аргумент
+*@return результат
+*/
+    public double max(double first, double second){
 
 
-
-        if (r > s && r > h)
-        {
-            maximumm = r;
-
-
-        }
-        else if(s > r && s > h){
-            maximumm = s;
-        }
-        else if (h > s && h > r){
-            maximumm = h;
-        }
-
-
-
-
-return maximumm;
-    }
+        max(a.distanceTo(b),max(a.distanceTo(c),b.distanceTo(c)));
+        return (first > second )? first : second;
 }
