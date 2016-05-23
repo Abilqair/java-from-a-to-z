@@ -1,3 +1,8 @@
+package types;
+/** Класс создает треугольник и вычисляет квадрат
+* @author B.W.
+*@since 23.05.16
+*/
 public class Triangle {
     public Point a;
     public Point b;
@@ -9,7 +14,7 @@ public class Triangle {
         this.c = c;
     }
 
-
+/** Метод создает треугольник и вычисляет квадрат*/
     public double area() {
 
 
@@ -18,10 +23,5 @@ public class Triangle {
             double h = a.distanceTo(c);
             double p = (r + s + h) / 2;
             return Math.sqrt(p * (p - r ) * (p - s) * (p - h));
-
-
-
-
     }
-
 }
