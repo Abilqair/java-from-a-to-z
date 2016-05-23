@@ -21,6 +21,8 @@ public void rotate() {
 }
 
 public static void main(String[] args) {
-    new TwoDimension(new int[][] {{1, -9, 5},{4, 2, 3},{7, -5, 6}}).rotate();
+    new TwoDimension(new int[][] {{1, -9, 5},
+                                 {4, 2, 3},
+                                 {7, -5, 6}}).rotate();
 }
 }
