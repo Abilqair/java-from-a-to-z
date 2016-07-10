@@ -5,4 +5,26 @@
 <version>1.0</version>
 <name>tracker</name>
 <packaging>jar</packaging>
+<build>
+ 
+  <plugins>
+   
+      <!-- Maven JAR Plugin --> 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.1</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>kz.bw.start.StartUi</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+ 
+  </plugins>
+ 
+</build>
+
 </project>
