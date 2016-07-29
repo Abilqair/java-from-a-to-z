@@ -8,141 +8,91 @@ import kz.bw.models.*;
 import java.util.*;
 
 public class Tracker{
-	private Task[] items = new Task[10];
+	public Item[] items = new Item[10];
 	private int position = 0;
 	private static final Random RN = new Random();
 	
 	/** Метод вводит заявки*/
-	public Task add(Task item) {
+	public Item add(Item item) {
 		item.setId(this.generateId());
 		this.items[position++] = item;
 		return item;
 	}
 	
 	/** Метод редактирует заявки*/
-	public void edit(Task itemToo){
-		if(itemToo == null) return;	
-					
-		for(int index = 0;index != this.position;index++){
-			if(itemToo.getId() == (this.items[index].getId())){
-				items[index] = itemToo;
+	public void edit(Item item) {
+			for (int i =0; i < this.items.length; i++) {
+				if (this.items[i].getId().equals(item.getId())) {
+					this.items[i] = item;
+					break;
+				} else System.out.println("Id is not found");
 			}
 		}
-	}
 	
 	/** Метод удаляет заявки*/
-	public void delete(Task item){
-		String id = item.getId();
-		if(id != null){
-			for(int index = 0; index < this.items.length; index++){
-				if(this.items[index] != null && this.items[index].getId().equals(id)){
-				   this.items[index] = null;
-				}
+	public void delete(String id) {
+			int index = 0;
+			for (int i = 0; i < this.items.length; i++) {
+				if(this.items[i].getId().equals(id)) {
+					index = i;
+					break;
+				} else if(!this.items[i].getId().equals(id)) {System.out.println("Such Id is not found");}
+			}
 			
-				if(this.items[index] == null && (index+1) != this.items.length){
-				   this.items[index] = this.items[index+1];
-				   this.items[index+1] = null;
-				   if(this.items[index] != null){
-					  this.position = (index+1)<this.items.length?(index+1):index;  
-				   }
-				   	
-				}
+			if (index >= 0 && index < this.items.length) {
+				Item[] copy = new Item[this.items.length-1];
+				System.arraycopy(this.items, 0, copy, 0, index);
+				System.arraycopy(this.items, index+1, copy, index, this.items.length-index-1);
+				this.items = copy;
+				this.position--;
 			}
 		}
-	}
 	
-	/** Метод находит по ID*/
-	protected Task findById(String id) {
-		Task result = null;
-		for (Task item : items) {
-			if (item != null && item.getId().equals(id)){
-				result = item;
-				break;
+	
+	public void search (String phrase) {
+		Item[] sorted = new Item[this.items.length];
+			int filterIndex = 0;
+			for (int i = 0; i < this.items.length; i++) {
+				if (this.items[i] != null && (this.items[i].getName().equals(phrase) | 
+				                              this.items[i].getDescription().equals(phrase)| 
+				                              this.items[i].getId().equals(phrase))) {
+					sorted[filterIndex++] = this.items[i];
+					System.out.printf("%s \tName: %s \n\tDescription: %s\n",this.items[i].getId(), 
+                                                                                 this.items[i].getName(), 
+																 this.items[i].getDescription());
+																 break;
+				} else if(this.items[i] != null && (!this.items[i].getName().equals(phrase) | 
+				                              !this.items[i].getDescription().equals(phrase)| 
+				                              !this.items[i].getId().equals(phrase))) {
+					System.out.println("Id not found");
+				}
 			}
-		
-		}
-		return result;
 	}
 	
 	
-	/** Метод фильтрует по имени*/
-	public Task[] findByFilter(String name){
-		int length = this.items.length;
-		Task[] copy = new Task[length];
-		int filterIndex = 0;
-		for(int fullIndex = 0;fullIndex < length;fullIndex++){
-				if(this.items[fullIndex] != null && this.items[fullIndex].getName().contains(name)){
-					copy[filterIndex++] = this.items[fullIndex];
+	public void show(Item[] array) {
+			System.out.println("================================================================================");
+
+			int cell = 1;
+			for (Item item : array) {
+				if (item != null) {
+					System.out.printf("%s \tName: %s \n\tDescription: %s\n",
+							item.getId(),item.getName(),item.getDescription());
+					System.out.println();
 				}
+			}
+		System.out.println("================================================================================");
 		}
-		
-		Task[] result = new Task[filterIndex];
-		System.arraycopy(copy,0,result,0,filterIndex);
-		
-		return result;		
-	}
-	
-	/** Метод фильтрует по имени и описанию*/
-	public Task[] findByFilter(String name, String description){
-	
-		int length = this.items.length;
-		Task[] copy = new Task[length];
-		int filterIndex = 0;
-		for(int fullIndex = 0;fullIndex < length;fullIndex++){
-				if(this.items[fullIndex] != null && this.items[fullIndex].getName().contains(name)&&this.items[fullIndex].getDescription().contains(description)){
-					copy[filterIndex++] = this.items[fullIndex];
-				}
-		}
-		
-		Task[] result = new Task[filterIndex];
-		System.arraycopy(copy,0,result,0,filterIndex);
-		return result;		
-	
-	}
 	
 	String generateId() {
-		return String.valueOf(System.currentTimeMillis() + RN.nextInt());
-	}
+			return String.valueOf(Math.round(Math.random() * 100));
+		}
 	
-	public Task[] getAll() {
-		Task[] result = new Task[this.position];
+	public Item[] getAll() {
+		Item[] result = new Item[this.position];
 		for (int index = 0;index != this.position;index++){
 			result[index] = this.items[index];
 		}
-		return result;
-	}
-	
-	/** Метод вводит комментарии*/
-	public void addComments(Task item, String comm){
-		
-		Task itemThree = findById(item.getId());
-		if(itemThree != null){
-		   itemThree.setComm(comm);
-		}
-	
-	}
-	
-	public String getComments(Task item){
-	
-		String result =null;
-		Task itemThree = findById(item.getId());
-			
-		if(itemThree != null){
-			result = itemThree.getComm();
-		}
-			
-		return result;
-	}
-	
-	public String getComments(Task item, int pos){
-		
-		String result = null;
-		Task itemThree = findById(item.getId());
-			
-		if(itemThree != null){
-			result = itemThree.getComm(pos);
-		}
-			
 		return result;
 	}
 }
