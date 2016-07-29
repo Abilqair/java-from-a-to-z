@@ -1,6 +1,6 @@
 /**Класс тестирвочный тестирует класс трэкер.
 * @author B.W.
-*@since 08.07.16
+*@since 29.07.16
 */
 package kz.bw.start;
 
@@ -19,14 +19,14 @@ public class StartUI{
 	
 	
 	public void init(){
-	   Tracker tracker = new Tracker();
-	   System.out.println(salute);
+	Tracker tracker = new Tracker();
+	System.out.println(salute);
         String point = input.ask(String.format("Please press enter to skip.\n"));
         System.out.println("List of actions: ");
         if (point != null) System.out.println(menu);
 	   
 	   
-	   int key = 0;
+	int key = 0;
         while (key != 6) {
             key = Integer.parseInt(input.ask("Enter your choice: "));
                 if (key == 1) {
