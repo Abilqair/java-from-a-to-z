@@ -1,3 +1,7 @@
+/**Класс реализует интерфейс класс Input.
+* @author B.W.
+*@since 29.07.16
+*/
 package kz.bw.start;
 
 public class StubInput implements Input{
