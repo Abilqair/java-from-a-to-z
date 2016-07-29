@@ -1,6 +1,6 @@
 /** Класс обрабатывает все заявки.
 * @author B.W.
-*@since 08.07.16
+*@since 29.07.16
 */
 package kz.bw.start;
 
@@ -48,7 +48,7 @@ public class Tracker{
 			}
 		}
 	
-	
+	/** Метод ищет заявки по id, по name, по description*/
 	public void search (String phrase) {
 		Item[] sorted = new Item[this.items.length];
 			int filterIndex = 0;
@@ -69,7 +69,7 @@ public class Tracker{
 			}
 	}
 	
-	
+	/** Метод показывает все введенные заявки*/
 	public void show(Item[] array) {
 			System.out.println("================================================================================");
 
@@ -83,7 +83,7 @@ public class Tracker{
 			}
 		System.out.println("================================================================================");
 		}
-	
+	/** Метод генерирует ID рандомно от нуля до ста*/
 	String generateId() {
 			return String.valueOf(Math.round(Math.random() * 100));
 		}
