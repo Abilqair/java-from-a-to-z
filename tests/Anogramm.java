@@ -3,7 +3,7 @@
 *@since 09.08.16
 */
 public class Anogramm{
-	/** Метод определяет является ли входное
+	/** Метод проверяет является ли входное
 	слово анограммой*/
 	boolean isAnogramm(String value){
 		String value2 = "";
